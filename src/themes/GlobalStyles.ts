@@ -1,6 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
+import Fontello from './Fontello';
 
 const GlobalStyle = createGlobalStyle`
+    ${Fontello}
     * {
         box-sizing: border-box;
         margin: 0;

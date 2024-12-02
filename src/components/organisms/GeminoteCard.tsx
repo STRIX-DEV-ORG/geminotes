@@ -9,15 +9,17 @@ import { GeminoteProps } from '@geminotes/props';
 import getFormattedDate from '@geminotes/utils/getFormattedDate';
 
 interface GeminoteCardProps
-    extends ComponentPropsWithRef<'div'>,
+    extends Omit<ComponentPropsWithRef<'div'>, 'onSelect'>, // Omitimos 'onSelect' de las props heredadas
         Omit<GeminoteProps, 'createdAt' | 'content'> {
     id: string;
     title: string;
     onDelete: (noteId: string) => void;
+    onSelect: (noteId: string) => void; // Definimos nuestra propia versión de 'onSelect'
 }
 
 const StyledCardWrapper = styled(GeminotePaper)`
     margin-bottom: ${({ theme }) => theme.spacing(3)};
+    cursor: pointer;
 `;
 
 const StyledCardHeader = styled.div`
@@ -50,14 +52,20 @@ const GeminoteCard = ({
     tags,
     updatedAt,
     onDelete,
+    onSelect, // Nuestra prop personalizada
     ...props
 }: GeminoteCardProps) => {
-    const handleDeletion = () => {
+    const handleDeletion = (event: React.MouseEvent) => {
+        event.stopPropagation();
         onDelete(id);
     };
 
+    const handleSelection = () => {
+        onSelect(id);
+    };
+
     return (
-        <StyledCardWrapper {...props}>
+        <StyledCardWrapper {...props} onClick={handleSelection}>
             <StyledCardHeader>
                 <GeminoteTypography variant="h2">{title}</GeminoteTypography>
                 <GeminoteButton variant="text" onClick={handleDeletion}>

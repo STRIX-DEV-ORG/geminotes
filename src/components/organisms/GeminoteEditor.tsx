@@ -10,6 +10,7 @@ import { GeminoteProps } from '@geminotes/props';
 // import { NEW_LINE, SOURCE_REFERENCE } from '@geminotes/utils/validation';
 import getFormattedDate from '@geminotes/utils/getFormattedDate';
 import GeminoteButton from '@geminotes/atoms/GeminoteButton';
+import GeminoteEditorNavbar from '@geminotes/molecules/GeminoteEditorNavbar';
 
 import useGeminotes from '@geminotes/stores/useGeminotes';
 
@@ -106,7 +107,8 @@ const GeminoteEditor = ({
 
     return (
         <StyledWrapper>
-            {id}
+            {/* {id} */}
+            <GeminoteEditorNavbar />
             <StyledEditorHeader>
                 <GeminoteEditableTypography
                     name="note-title"
